@@ -18,11 +18,11 @@ const useStyles = makeStyles({
 
 
 export default function Task() {
-  let tabledata=[
+  const tabledata=[
     {
         name:"item 1",
         price:150,
-        pricefiled:true,
+        edited:false,
         Coupn:"yes",
         in_stock:"yes",
         checked:false
@@ -30,7 +30,7 @@ export default function Task() {
   {
       name:"item 2",
       price:200,
-      pricefiled:true,
+      edited:false,
       Coupn:"No",
       in_stock:"No",
       checked:true
@@ -38,7 +38,7 @@ export default function Task() {
   {
     name:"item 3",
     price:200,
-    pricefiled:true,
+    edited:false,
     Coupn:"No",
     in_stock:"No",
     checked:true
@@ -100,23 +100,23 @@ export default function Task() {
   }
 }
 
-const changePrice=(selectedTaskIndex)=>{
-  const check = data.map((task, index) => {
-    if (index === selectedTaskIndex) {
+
+const changePrice=(selectedIndex)=>{
+  const final=data.map((data,index)=>{
+    if(selectedIndex===index){
       return {
-        ...task, 
-        pricefiled:!task.pricefiled,
-      };
+        ...data,
+        edited:!data.edited
+      }
     }
-    return task;
+    return data
   })
-  setview(check)
-  setdata(check)
+  setview(final)
+  setdata(final)
 }
 
+
 const price=(e,selectedIndex)=>{
-  console.log(selectedIndex)
-  console.log(e)
   const check = data.map((task, index) => {
     if (index === selectedIndex) {
       return {
@@ -126,7 +126,6 @@ const price=(e,selectedIndex)=>{
     }
     return task;
   })
-  console.log(check)
   setview(check)
   setdata(check)
 }
@@ -147,11 +146,11 @@ const price=(e,selectedIndex)=>{
           </TableRow>
         </TableHead>
         <TableBody>
-          {view.map((row,index) => { 
+          {view?.map((row,index) => {
             const add=()=>{
               modify(index)
             }
-            const field=()=>{
+            const fieldChange=()=>{
               changePrice(index)
             }
             const newPrice=(e)=>{
@@ -168,9 +167,9 @@ const price=(e,selectedIndex)=>{
               <TableCell align="right">
                 {row.name}
               </TableCell>
-            <TableCell  align="right">{row.pricefiled===true?(<p onClick={field}>{row.price}</p>):
+            <TableCell  align="right">{row.edited===false?(<p onClick={fieldChange}>{row.price}</p>):
             (<div><input onChange={newPrice}type="text" value={row.price}></input>
-            <button onClick={field} >submit</button></div>)} </TableCell>
+            <button onClick={fieldChange} >submit</button></div>)} </TableCell>
               <TableCell align="right">{row.Coupn}</TableCell>
               <TableCell align="right">{row.in_stock}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
