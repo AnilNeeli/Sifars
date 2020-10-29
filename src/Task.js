@@ -82,7 +82,6 @@ export default function Task() {
       }
       return data
     })
-    console.log(final)
     setdata(final)
     setview(final)
   }
