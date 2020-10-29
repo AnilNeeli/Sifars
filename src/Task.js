@@ -59,7 +59,6 @@ export default function Task() {
     })
     setview(check)
     setdata(check)
-    setoriginal(check)
   }
 
   const del=()=>{
@@ -72,8 +71,20 @@ export default function Task() {
     
   }
   const reset=()=>{
-    setview(original)
-    setdata(original)
+    
+    const final=data.map((data,index)=>{
+      if(data.checked===true){
+        const oldprice=original[index].price
+        return {
+          ...data,
+          price:oldprice,
+        }
+      }
+      return data
+    })
+    console.log(final)
+    setdata(final)
+    setview(final)
   }
 
   const search=(e)=>{
@@ -106,11 +117,12 @@ const changePrice=(selectedIndex)=>{
 
 
 const price=(e,selectedIndex)=>{
+  const newprice=parseInt(e)
   const check = data.map((task, index) => {
     if (index === selectedIndex) {
       return {
         ...task, 
-        price:e,
+        price:newprice,
       };
     }
     return task;
