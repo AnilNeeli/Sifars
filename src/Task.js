@@ -117,12 +117,11 @@ const changePrice=(selectedIndex)=>{
 
 
 const price=(e,selectedIndex)=>{
-  const newprice=parseInt(e)
   const check = data.map((task, index) => {
     if (index === selectedIndex) {
       return {
         ...task, 
-        price:newprice,
+        price:e,
       };
     }
     return task;
