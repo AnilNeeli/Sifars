@@ -165,8 +165,7 @@ const price=(e,selectedIndex)=>{
                 {row.name}
               </TableCell>
             <TableCell  align="right">{row.edited===false?(<p onClick={fieldChange}>{row.price}</p>):
-            (<div><input onChange={newPrice}type="text" value={row.price}></input>
-            <button onClick={fieldChange} >submit</button></div>)} </TableCell>
+            (<div><form onSubmit={fieldChange}><input  onChange={newPrice}type="text" value={row.price}></input></form></div>)} </TableCell>
               <TableCell align="right">{row.Coupn}</TableCell>
               <TableCell align="right">{row.in_stock}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
