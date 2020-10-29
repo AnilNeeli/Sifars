@@ -43,7 +43,9 @@ export default function Task() {
   ]
   const [data,setdata] = useState(tabledata);
   const [view,setview]=useState(data);
+  const[original,setoriginal]=useState(data);
   const classes = useStyles();
+  
 
   const modify=(selectedTaskIndex)=>{
     const check = data.map((task, index) => {
@@ -57,6 +59,7 @@ export default function Task() {
     })
     setview(check)
     setdata(check)
+    setoriginal(check)
   }
 
   const del=()=>{
@@ -65,23 +68,12 @@ export default function Task() {
     })
     setview(final)
     setdata(final)
+    setoriginal(final)
     
   }
   const reset=()=>{
-    const final=data.map((data)=>{
-      if(data.checked===true){
-        return {
-          ...data,
-          price:0,
-          coupn:"NA",
-          in_stock:"NA",
-          checked:!data.checked
-        }
-      }
-      return data
-    })
-    setview(final)
-    setdata(final)
+    setview(original)
+    setdata(original)
   }
 
   const search=(e)=>{
